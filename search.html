@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="main">
+        <h1 >Candidate Resume</h1>
+        
+        <button onclick="prev()">Previous</button>
+        <button onclick="next()">Next</button>
+        <p> Search Resume Based on Applied for</p>
+        <input type="text" id="candResume" placeholder="Search" onkeyup="vlookup()">
+        </div>
+    
+    <div id="root"></div>
+
+
+        <script>
+            const url = "./Data.json";
+            console.log("Fetching Data");
+            
+
+            var n=5;
+            getData(n);
+           /*Fetching function*/ 
+            async function getData(i) {
+                fetch(url).then((response)=>response.json()).then((data)=>{
+                console.log(data);
+    
+                var a = `${data.resume.length}`;
+                
+            resume();
+                     
+               function resume(){
+                    document.querySelector('#root').innerHTML = 
+            `           
+                    <div id="container">
+                        <div id="section1">
+                        <h1 class="centre">${data.resume[i].basics.name}</h1>
+                        <h3 class="centre"> Applied for : ${data.resume[i].skills.name}</h3>
+                        </div>
+
+                        <div id="section2">
+                        <img src="man.png"> 
+                        </div>
+
+                        
+                        <div id="section3" class="section">
+                            
+                                <p class="per_gray">Personal Information</p>
+                                <p class="per_left">${data.resume[i].basics.phone}</p>
+                                <p class="per_left">${data.resume[i].basics.email}</p>
+                                <a href="${data.resume[i].basics.profiles.url}" style="text-align: right; float:right">LinkedIn</a>
+                                </br>
+                                <p class="per_gray">Technical Skills</p>
+                                <p class="per_left">${data.resume[i].skills.keywords.join('</br>')}</p>
+                                                           
+                                <p class="per_gray" >Hobbies</p>
+                                <p class="per_left">${data.resume[i].interests.hobbies.join('</br>')}</p>
+                          
+                        </div>
+                            
+                        <div id="section4" class="section">
+                                <h3> Work Experience in Previous Oragnization </h3>
+
+                                <div class="dataMargin">
+                                <p><span class="bold">Company Name : </span> ${data.resume[i].work["Company Name"]}</p>
+                                <p><span class="bold">Position : </span> ${data.resume[i].work.Position}</p>
+                                <p><span class="bold">Start Date : </span> ${data.resume[i].work["Start Date"]}</p>
+                                <p><span class="bold">End Date :</span> ${data.resume[i].work["End Date"]}</p>
+                                <p><span class="bold">Summary : </span> ${data.resume[i].work.Summary}</p>
+                                </div>
+
+                                <h3> Projects </h3>
+                                <div class="dataMargin">
+                                <span style="font-weight:bold">${data.resume[i].projects.name}:</span>
+                                <span>${data.resume[i].projects.description}</span>
+                                </div>
+
+                                <h3> Education </h3>
+                                <div class="dataMargin">
+                                <ul>
+                                    <li> 
+                                        <span class="bold">UG:</span>
+                                        <span>${data.resume[i].education.UG.institute}
+                                        ${data.resume[i].education.UG.course},
+                                        ${data.resume[i].education.UG["Start Date"]}
+                                        , ${data.resume[i].education.UG["End Date"]}</span> 
+                                    </li>
+                                    <li>
+                                        <span class="bold"> PU :</span>
+                                        <span>${data.resume[i].education["Senior Secondary"].institute},
+                                            ${data.resume[i].education["Senior Secondary"].cgpa} </span>
+                                    </li>
+                                    <li>
+                                    <span class="bold">High School :</span>
+                                        <span>${data.resume[i].education["High School"].institute},
+                                            ${data.resume[i].education["High School"].cgpa} </span>
+                                    </li>
+                                </ul>
+                                </div>
+
+                                <h3> Internship </h3>
+                                <div class="dataMargin">
+                                <ul>
+                                    <li><span class="bold"> Company Name :</span>
+                                        <span>${data.resume[i].Internship["Company Name"]}</span>
+                                    </li>
+                                    <li><span class="bold"> Position :</span>
+                                        <span>${data.resume[i].Internship.Position}</span>
+                                    </li>
+                                    <li><span class="bold"> Start Date :</span>
+                                        <span>${data.resume[i].Internship["Start Date"]}</span>
+                                    </li>
+                                    <li><span class="bold"> End Date :</span>
+                                        <span>${data.resume[i].Internship["End Date"]}</span>
+                                    </li>
+                                    <li><span class="bold"> Summary :</span>
+                                        <span>${data.resume[i].Internship["Summary"]}</span>
+                                    </li>
+                                </ul>
+                                </div>
+                                <h3> Achievements </h3>
+                                <div class="dataMargin">
+                                <ul>
+                                    <li>${data.resume[i].achievements.Summary}</li>
+                                </ul>
+                                </div>
+                        </div>
+
+                    </div>
+            `   
+                }
+               
+            }).catch((error)=> document.write('Cant Fetch data'))
+            }
+            
+
+            var i = 0;
+            function prev()
+            {
+                if(i<=0) i = n;
+                i--;
+                return setImg();
+            }
+          
+            function next()
+            {
+                if(i>=n-1) i=-1;
+                i++;
+                return setImg()
+            }
+
+            function setImg()
+            {
+                return getData(i);
+
+            }
+            
+                
+            
+        
+    </script>
+    
+</body>
+</html>

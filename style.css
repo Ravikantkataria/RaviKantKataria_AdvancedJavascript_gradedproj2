@@ -1,0 +1,63 @@
+#section1{
+    background-color: aqua;
+    text-align: center;
+    width:88%;
+    float:left;
+    
+    }
+
+#section2{
+    width:12%;
+    float:right;
+ 
+}
+
+img{
+    height: 119px;
+}
+
+.section{
+    display: inline-block;
+    margin:2%;
+
+}
+
+#section3{
+    width: 20%;
+    height: auto;
+    margin:0%;
+    float:left;
+    background-color:  rgb(230, 177, 159);
+    
+    
+}
+
+#section4{
+    width: 80%;
+    height: auto;
+    margin:0% auto;
+    float:right auto;
+    
+}
+
+.per_gray{
+    background-color: gray;
+    font-weight: bold;
+    margin: 5px;
+    padding: 0%;
+    
+} 
+
+.per_left{
+    text-align: right; 
+    margin: 5px;
+    padding: 0%;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.dataMargin{
+    margin:30px
+}
